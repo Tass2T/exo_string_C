@@ -7,7 +7,7 @@ void moveCursor(int x, int y)
     refresh();
 }
 
-void getInput(int *fin, int* x, int* y)
+void getInput(int *fin, Player *p, NextLetter *n)
 {
     int c = getch();
 
@@ -18,23 +18,35 @@ void getInput(int *fin, int* x, int* y)
             break;
         // HAUT
         case 65:
-            if (*y > MARGIN_TOP) *y = *y - 1;
-            moveCursor(*x,*y);
+            if (p->y >= MARGIN_TOP) p->y = p->y - 1;
+            moveCursor(p->x,p->y);
+            checkIfCollide(p, n, fin);
+            printSentence(p->sentence, p->nbShown);
+            drawNextLetter(p, n, fin);
             break;
         // BAS
         case 66:
-            if (*y < HEIGHT) *y = *y + 1;
-            moveCursor(*x,*y);
+            if (p->y <= HEIGHT + MARGIN_TOP) p->y = p->y + 1;
+            moveCursor(p->x,p->y);
+            checkIfCollide(p, n, fin);
+            printSentence(p->sentence, p->nbShown);
+            drawNextLetter(p, n, fin);
             break;
         // GAUCHE
         case 68:
-            if (*x > MARGIN_LEFT)*x = *x - 1;
-            moveCursor(*x,*y);
+            if (p->x >= MARGIN_LEFT) p->x = p->x - 1;
+            moveCursor(p->x,p->y);
+            checkIfCollide(p, n, fin);
+            printSentence(p->sentence, p->nbShown);
+            drawNextLetter(p, n, fin);
             break;
         // DROITE
         case 67:
-            if (*x < WIDTH) *x = *x + 1;
-            moveCursor(*x,*y);
+            if (p->x <= WIDTH + MARGIN_LEFT) p->x = p->x + 1;
+            moveCursor(p->x,p->y);
+            checkIfCollide(p, n, fin);
+            printSentence(p->sentence, p->nbShown);
+            drawNextLetter(p, n, fin);
             break;
         default:
             break;

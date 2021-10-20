@@ -1,7 +1,7 @@
 
 CC = gcc
 
-OBJS = main.o input.o draw.o
+OBJS = main.o input.o draw.o init.o
 
 all: main clean
 

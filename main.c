@@ -2,16 +2,21 @@
 
 int main()
 {
+    Player p;
+    NextLetter n;
+    initStructs(&p,&n);
+    int fin = false;
+
     initscr();
     refresh();
-    int fin = false, x = MARGIN_LEFT + 3, y = MARGIN_TOP + 3;
 
-    // drawFrame();
-    move(y,x);
+    move(p.y,p.x);
+    printSentence(p.sentence, p.nbShown);
+    drawNextLetter(&p, &n, &fin);
     refresh();
     while(!fin)
     {
-        getInput(&fin, &x, &y);
+        getInput(&fin, &p, &n);
     }
 
     endwin();
